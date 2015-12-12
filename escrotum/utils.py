@@ -93,17 +93,17 @@ def bgra2rgba(pixels, width, height):
     except ImportError:
         import array
         HAS_NUMPY = False
-        print("No numpy support, saving would be slower")
+        print "No numpy support, saving will be slower"
 
     # GDK wants RGBA but we currently have BGRA, so let's flip R and B
-    if(HAS_NUMPY):
+    if HAS_NUMPY:
         arr = np.frombuffer(pixels, dtype=np.uint8)
         arr.shape = (-1, 4)
         data = arr[:,[2,1,0,3]]
     else:
         data = array.array ("c", pixels)
         for x in range (width):
-            for y in range (height):
+            for y in range(height):
                 i = (width * y + x) * 4
                 data[i + 0], data[i + 2] = data[i + 2], data[i + 0]
     return data.tostring()

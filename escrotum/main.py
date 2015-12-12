@@ -10,7 +10,7 @@ import gtk
 import cairo
 import gobject
 
-from utils import get_selected_window, daemonize, bgra2rgba
+from escrotum.utils import get_selected_window, daemonize, bgra2rgba
 
 
 __version__ = "0.2.1"
@@ -37,7 +37,7 @@ class Escrotum(gtk.Window):
         colormap = self.screen.get_rgba_colormap()
 
         self.rgba_support = False
-        if (colormap is not None and self.screen.is_composited()):
+        if colormap is not None and self.screen.is_composited():
             self.rgba_support = True
             self.set_opacity(0.4)
 
@@ -465,7 +465,7 @@ def run():
     args = get_options()
 
     if args.version:
-        print("escrotum %s" % __version__)
+        print "escrotum %s" % __version__
         exit()
 
     if args.countdown and not args.delay:
